@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
+
 html {
     font-family: "Lato", sans-serif;
     font-size: 26px;
@@ -14,7 +15,9 @@ form div {
     margin: 15px 0;
 }
 
-form div label, form div, input {
+form div label,
+form div,
+input {
     display: block;
     width: 100%;
 }
@@ -31,7 +34,7 @@ input {
 }
 
 input[type="button"] {
-    background: #234465;
+    background: #5180af;
     width: 61%;
     margin: 0 auto;
     color: white;
@@ -45,7 +48,7 @@ input[type="button"]:hover {
 }
 
 .result-container {
-    background: #234465;
+    background: #5e8dbd;
     margin: 0 auto;
     width: 43%;
     color: white;
