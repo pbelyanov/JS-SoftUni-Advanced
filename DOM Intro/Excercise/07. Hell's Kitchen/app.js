@@ -38,5 +38,28 @@ function solve() {
             }
          }
       }
+
+      let highestSalay = 0;
+      for (let lines in allRestaurants) {
+         if (lines === bestRestaurantName) {
+            for (let current in allRestaurants[lines]) {
+               if (highestSalay < allRestaurants[lines][current]) {
+                  highestSalay = allRestaurants[lines][current]
+               }
+            }
+         }
+
+      }
+
+      console.log(highestSalay);
+
+      let result = `Name: ${bestRestaurantName} Average Salary: ${bestAverageSalary.toFixed(2)} Best Salary: ${highestSalay}`
+
+      document.querySelector('#bestRestaurant p').textContent = result
+      let workersOrdered = Object.entries(allRestaurants[bestRestaurantName]).sort((a, b) => b[1] - a[1]);
+
+      let workersAsString = '';
+      workersOrdered.forEach(w => workersAsString += `Name: ${w[0]} With Salary: ${w[1]} `);
+      document.querySelector('#workers p').textContent = workersAsString;
    }
 }
