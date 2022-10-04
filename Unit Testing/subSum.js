@@ -19,9 +19,8 @@ describe('sum', () => {
 
     it('should be an array', () => {
         let input = ([1, 2, 3], 0, 3)
-
         let result = sum([1, 2, 3], 0, 3);
-
         expect(result).to.be.equal(6);
     })
+
 })

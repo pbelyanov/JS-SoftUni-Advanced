@@ -1,0 +1,24 @@
+function playingCards(face, suit) {
+    let validFace = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+    let validSuit = ['S', 'H', 'D', 'C']
+
+    if (validFace.includes(face) && validSuit.includes(suit)) {
+        switch (suit) {
+            case 'S':
+                return `${face}\u2660`;
+            case 'H':
+                return `${face}\u2665`;
+            case 'D':
+                return `${face}\u2666`;
+            case 'C':
+                return `${face}\u2663`;
+        }
+    } else {
+        return `Invalid card`
+    }
+
+}
+
+module.exports = {
+    playingCards
+};
