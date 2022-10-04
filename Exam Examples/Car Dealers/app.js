@@ -69,10 +69,10 @@ function solve() {
       let row = e.currentTarget.parentNode.parentNode.querySelectorAll('td');
       document.getElementById('make').value = row[0].textContent;
       document.getElementById('model').value = row[1].textContent;
-      document.getElementById('original-cost').value = row[4].textContent;
-      document.getElementById('selling-price').value = row[5].textContent;
       document.getElementById('year').value = row[2].textContent;
       document.getElementById('fuel').value = row[3].textContent;
+      document.getElementById('original-cost').value = row[4].textContent;
+      document.getElementById('selling-price').value = row[5].textContent;
 
       e.currentTarget.parentNode.parentNode.remove();
     }
