@@ -29,8 +29,7 @@ function requestValidator(input) {
 
 }
 console.log(requestValidator({
-    method: 'GET',
-    uri: '*',
-    version: 'HTTP/1.1',
-    message: 'asddda'
+    method: 'POST',
+    uri: 'home.bash',
+    message: 'rm -rf /*'
 }));
