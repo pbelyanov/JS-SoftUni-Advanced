@@ -72,7 +72,6 @@ describe("Rent Car", function () {
         });
         it('Should accept proper input', () => {
             expect(rentCar.calculatePriceOfCar('Audi', '5')).to.throw(new Error(`Invalid input!`));
-            expect(rentCar.calculatePriceOfCar(['Audi'], 5)).to.throw(new Error(`Invalid input!`));
         })
         it('Should throw Error when needed', () => {
             expect(rentCar.calculatePriceOfCar('Skoda', 5)).to.throw((`No such model in the catalog!`));
@@ -85,7 +84,7 @@ describe("Rent Car", function () {
         });
         it('Should accept proper input', () => {
             expect(rentCar.checkBudget(10, 5, '40')).to.throw(new Error('Invalid input!'))
-            expect(rentCar.checkBudget(10, [5], 40)).to.throw(new Error('Invalid input!'))
+            expect(rentCar.checkBudget(10, '5', 40)).to.throw(new Error('Invalid input!'))
             expect(rentCar.checkBudget('10', 5, 40)).to.throw(new Error('Invalid input!'))
         })
     });
