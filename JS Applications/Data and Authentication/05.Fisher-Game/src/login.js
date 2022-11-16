@@ -26,4 +26,5 @@ formToLogin.addEventListener('submit', async event => {
         document.getElementById('login-form').reset();
         throw new Error('Wrong Email of Password')
     }
+
 })
