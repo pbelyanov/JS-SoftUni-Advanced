@@ -11,4 +11,9 @@ buttonLogout.addEventListener('click', async event => {
     });
 
     localStorage.clear();
+    location.reload()
 })
+
+if (localStorage.email) {
+    document.getElementsByTagName('span')[0].textContent = localStorage.email;
+}

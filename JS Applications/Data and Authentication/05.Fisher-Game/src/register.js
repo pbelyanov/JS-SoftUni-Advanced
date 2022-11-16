@@ -24,17 +24,13 @@ async function submitRegister(event) {
 
     const authToken = response.accessToken;
     localStorage.setItem('authToken', authToken);
+
+    if (registered.status === 200 || registered.status === 201) {
+        location.href = `index.html`
+
+    } else {
+        document.getElementById('register-form').reset();
+        throw new Error('Already Existing')
+    }
+
 }
-
-const buttonLogout = document.getElementById('logout');
-buttonLogout.addEventListener('click', async event => {
-
-    let data = await fetch('http://localhost:3030/users/logout', {
-        method: 'get',
-        headers: {
-            'X-Authorization': `${localStorage.getItem('authToken')}`
-        }
-    });
-
-    localStorage.clear();
-})
