@@ -1,9 +1,12 @@
 // Taking info from form:
+let formElement = document.getElementById('form-table');
 
-event.preventDefault();
-const dataForm = new FormData(event.target);
+formElement.addEventListener('submit', event => {
+    event.preventDefault();
+    const dataForm = new FormData(event.target);
 
-const data = Object.fromEntries(dataForm.entries());
+    const data = Object.fromEntries(dataForm.entries());
+})
 
 // Login request
 
@@ -23,6 +26,15 @@ formToLogin.addEventListener('submit', async event => {
     let response = await request.json()
     const authToken = response.accessToken;
     localStorage.setItem('authToken', authToken);
+    localStorage.setItem('email', response.email);
+    localStorage.setItem('ownerID', response._id);
+    if (request.status === 200 || request.status === 201) {
+        location.href = `index.html`
+
+    } else {
+        document.getElementById('login-form').reset();
+        throw new Error('Wrong Email of Password')
+    }
 })
 
 // Register request
@@ -83,4 +95,25 @@ let name = await fetch(`http://localhost:3030/data/catches/${dataID}`, {
         'X-Authorization': `${localStorage.getItem('authToken')}`
     },
     body: JSON.stringify(newInfo)
+})
+
+// Get Request
+
+let response = await fetch(`http://localhost:3030/jsonstore/collections/myboard/posts`);
+let data = await response.json();
+
+// Logout Request
+
+const buttonLogout = document.getElementById('logout');
+buttonLogout.addEventListener('click', async event => {
+
+    let data = await fetch('http://localhost:3030/users/logout', {
+        method: 'get',
+        headers: {
+            'X-Authorization': `${localStorage.getItem('authToken')}`
+        }
+    });
+
+    localStorage.clear();
+    location.reload()
 })

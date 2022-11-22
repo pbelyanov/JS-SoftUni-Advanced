@@ -1,5 +1,3 @@
-console.log('TODO:// Implement Home functionality');
-
 const buttonLogout = document.getElementById('logout');
 buttonLogout.addEventListener('click', async event => {
 
@@ -19,10 +17,13 @@ if (localStorage.email) {
     document.getElementById('login').style.display = "none";
     document.getElementById('register').style.display = "none";
     document.getElementsByClassName('add')[0].disabled = false;
+    loadFunc(event)
 }
 
 if (!localStorage.email) {
     let button = document.getElementsByTagName('button');
+    document.getElementById('logout').style.display = "none";
+
     for (let row of button) {
         row.disabled = true;
         document.getElementsByClassName('load')[0].disabled = false;
@@ -51,12 +52,14 @@ async function loadFunc(event) {
 
     for (let row of data) {
         let clonedTemplate = clone.cloneNode(true);
+        let idToCheck = row._ownerId
         clonedTemplate.getElementsByClassName('angler')[0].value = row.angler;
         clonedTemplate.getElementsByClassName('weight')[0].value = row.weight;
         clonedTemplate.getElementsByClassName('species')[0].value = row.species;
         clonedTemplate.getElementsByClassName('location')[0].value = row.location;
         clonedTemplate.getElementsByClassName('bait')[0].value = row.bait;
         clonedTemplate.getElementsByClassName('captureTime')[0].value = row.captureTime;
+
         clonedTemplate.getElementsByClassName('update')[0].setAttribute('data-id', `${row._id}`);
         clonedTemplate.getElementsByClassName('update')[0].addEventListener('click', updateContent)
 
@@ -64,8 +67,19 @@ async function loadFunc(event) {
         clonedTemplate.getElementsByClassName('delete')[0].addEventListener('click', deleteContent)
         base.appendChild(clonedTemplate);
 
+        if (idToCheck !== localStorage.ownerID) {
+            clonedTemplate.getElementsByClassName('update')[0].disabled = true;
+            clonedTemplate.getElementsByClassName('delete')[0].disabled = true;
+        } else {
+            clonedTemplate.getElementsByClassName('update')[0].disabled = false;
+            clonedTemplate.getElementsByClassName('delete')[0].disabled = false;
+        }
+
     }
 }
+
+
+
 
 //add feature
 
