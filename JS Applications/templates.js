@@ -40,10 +40,7 @@ formToLogin.addEventListener('submit', async event => {
 // Register request
 
 
-formElement.addEventListener('submit', submitRegister)
-
-
-async function submitRegister(event) {
+formToRegister.addEventListener('submit', async event => {
     event.preventDefault();
     const dataForm = new FormData(event.target);
 
@@ -53,18 +50,28 @@ async function submitRegister(event) {
     dataToPost.email = data.email;
     dataToPost.password = data.password;
 
-    let registered = await fetch('http://localhost:3030/users/register', {
+    let request = await fetch('http://localhost:3030/users/register', {
         method: 'post',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify(dataToPost)
+        body: JSON.stringify(data)
     })
-    let response = await registered.json()
+    let response = await request.json()
 
     const authToken = response.accessToken;
-    localStorage.setItem('authToken', authToken);
-}
+    sessionStorage.setItem('authToken', authToken);
+    sessionStorage.setItem('email', response.email);
+    sessionStorage.setItem('ownerID', response._id);
+    if (request.status === 200 || request.status === 201) {
+        location.href = `index.html`
+
+    } else {
+        document.getElementById('login-form').reset();
+        window.alert('Wrong Email or Password')
+        throw new Error('Wrong Email or Password')
+    }
+})
 
 // Post Request
 
@@ -94,7 +101,7 @@ let name = await fetch(`http://localhost:3030/data/catches/${dataID}`, {
         'content-type': 'application/json',
         'X-Authorization': `${localStorage.getItem('authToken')}`
     },
-    body: JSON.stringify(newInfo)
+    body: JSON.stringify(data)
 })
 
 // Get Request
